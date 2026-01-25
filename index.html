@@ -1,13 +1,657 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My Info Page</title>
-  </head>
-  <body>
-    <h1>Welcome</h1>
-    <p>This is my simple GitHub Pages site.</p>
-    <p>Contact: you@example.com</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1a12" />
+
+  <title>LeafLore — Minecraft Server</title>
+  <meta name="description" content="LeafLore Minecraft Server — fresh 1.21.4 map, DiscordSRV enabled, mods allowed. Join: mc.promptt.org:25565" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="LeafLore — Minecraft Server" />
+  <meta property="og:description" content="Fresh 1.21.4 map • DiscordSRV • Mods allowed • No whitelist" />
+  <meta property="og:image" content="https://github.com/Promptt001/LeafLore/blob/main/LeafLore_logo.png?raw=true" />
+  <meta property="og:type" content="website" />
+
+  <!-- Favicons (optional: relies on logo url) -->
+  <link rel="icon" href="https://github.com/Promptt001/LeafLore/blob/main/LeafLore_logo.png?raw=true" />
+
+  <style>
+    :root{
+      --bg0: #07110b;
+      --bg1: #0b1a12;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --muted2: rgba(255,255,255,.52);
+      --accent: #4fe08f;
+      --accent2: #2bc26f;
+      --warn: #ffd166;
+      --shadow: 0 20px 70px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1100px;
+    }
+
+    *{ box-sizing: border-box; }
+    html, body{ height: 100%; }
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(79,224,143,.25), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(43,194,111,.18), transparent 55%),
+        radial-gradient(900px 900px at 40% 110%, rgba(0,255,153,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x: hidden;
+    }
+
+    a{
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover{ text-decoration: underline; }
+
+    .wrap{
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 26px 18px 70px;
+    }
+
+    .topbar{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px 0 18px;
+    }
+    .brand-mini{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+    }
+    .dot{
+      width: 10px; height: 10px;
+      border-radius: 99px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(79,224,143,.18);
+    }
+    .brand-mini strong{ letter-spacing: .3px; }
+    .pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--stroke);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 14px;
+      backdrop-filter: blur(10px);
+    }
+    .pill svg{ opacity: .85; }
+
+    .hero{
+      margin-top: 14px;
+      padding: 28px;
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 220px at 20% 0%, rgba(79,224,143,.22), transparent 60%),
+        radial-gradient(520px 260px at 95% 40%, rgba(43,194,111,.12), transparent 55%);
+      pointer-events:none;
+      filter: blur(0.2px);
+    }
+
+    .hero-grid{
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .logo-card{
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 14px 14px 10px;
+      border-radius: var(--radius);
+    }
+
+    .logo{
+      width: 74px;
+      height: 74px;
+      border-radius: 16px;
+      overflow: hidden;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+    .logo img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    h1{
+      margin: 0;
+      font-size: clamp(30px, 3.4vw, 46px);
+      letter-spacing: .3px;
+      line-height: 1.06;
+    }
+    .subtitle{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+
+    .badges{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--muted);
+      font-size: 13px;
+      backdrop-filter: blur(10px);
+    }
+    .badge .spark{
+      width: 8px; height: 8px;
+      border-radius: 99px;
+      background: rgba(79,224,143,.95);
+      box-shadow: 0 0 0 6px rgba(79,224,143,.16);
+    }
+
+    .cta{
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 18px;
+      border-radius: var(--radius);
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+    }
+
+    .cta-title{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .cta-title strong{
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+    .cta-title span{
+      font-size: 13px;
+      color: var(--muted2);
+    }
+
+    .ipbox{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      padding: 12px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .ip{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size: 15px;
+      letter-spacing: .2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1 1 auto;
+      color: rgba(255,255,255,.88);
+    }
+
+    .btn-row{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button, .btn{
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      border-radius: 14px;
+      padding: 11px 14px;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: .2px;
+      transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content: center;
+      gap: 9px;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary{
+      background: linear-gradient(180deg, rgba(79,224,143,.95), rgba(43,194,111,.92));
+      color: #052010;
+      box-shadow: 0 12px 34px rgba(43,194,111,.26);
+    }
+    .btn-primary:hover{ filter: brightness(1.02); transform: translateY(-1px); }
+    .btn-primary:active{ transform: translateY(0px); filter: brightness(.98); }
+
+    .btn-ghost{
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.88);
+      backdrop-filter: blur(10px);
+    }
+    .btn-ghost:hover{ background: rgba(255,255,255,.07); transform: translateY(-1px); }
+    .btn-ghost:active{ transform: translateY(0px); }
+
+    .fineprint{
+      color: var(--muted2);
+      font-size: 13px;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .card{
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      box-shadow: 0 18px 45px rgba(0,0,0,.30);
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(520px 220px at 20% 0%, rgba(79,224,143,.10), transparent 60%);
+      pointer-events:none;
+      opacity: .85;
+    }
+
+    .card > *{ position: relative; }
+
+    .card h2{
+      margin: 0 0 10px 0;
+      font-size: 16px;
+      letter-spacing: .2px;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+
+    .card p{
+      margin: 0 0 10px 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .list{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .list li{ margin: 6px 0; }
+
+    .two-col{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 18px;
+      margin-top: 8px;
+    }
+
+    .cmd{
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.09);
+      font-size: 14px;
+      color: rgba(255,255,255,.85);
+    }
+    .cmd code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      color: rgba(255,255,255,.92);
+      background: rgba(0,0,0,.20);
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .cmd span{
+      color: var(--muted);
+      flex: 1 1 auto;
+      text-align: right;
+    }
+
+    .footer{
+      margin-top: 22px;
+      color: var(--muted2);
+      font-size: 13px;
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 10px 2px 0;
+    }
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      background: rgba(5,32,16,.92);
+      border: 1px solid rgba(79,224,143,.35);
+      color: rgba(255,255,255,.92);
+      padding: 10px 12px;
+      border-radius: 999px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.50);
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+      backdrop-filter: blur(10px);
+      max-width: min(520px, calc(100vw - 24px));
+      text-align: center;
+    }
+    .toast.show{
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: 1fr; }
+      .two-col{ grid-template-columns: 1fr; }
+      .cta{ padding: 16px; }
+      .logo{ width: 68px; height: 68px; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ scroll-behavior: auto !important; }
+      button, .btn{ transition: none !important; }
+      .toast{ transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand-mini" aria-label="LeafLore">
+        <span class="dot" aria-hidden="true"></span>
+        <strong>LeafLore</strong>
+      </div>
+
+      <div class="pill" title="Server status not checked on this page">
+        <!-- simple leaf icon -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20 4c-8.5.5-14.5 6.5-16 16 8.5-1.5 15.5-7.5 16-16Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M8 16c2-2 6-6 12-8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>Fresh 1.21.4 map • Relaunched January</span>
+      </div>
+    </div>
+
+    <section class="hero" aria-label="LeafLore Server Info">
+      <div class="hero-grid">
+        <div>
+          <div class="logo-card">
+            <div class="logo">
+              <img
+                src="https://github.com/Promptt001/LeafLore/blob/main/LeafLore_logo.png?raw=true"
+                alt="LeafLore logo"
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <h1>LeafLore</h1>
+              <div class="subtitle">
+                <strong>LeafLore</strong> (<span style="color:rgba(255,255,255,.85)">mc.solaria.lol</span>) recently relaunched in January
+                with a fresh <strong>1.21.4</strong> map.
+              </div>
+            </div>
+          </div>
+
+          <div class="badges" role="list" aria-label="Highlights">
+            <div class="badge" role="listitem"><span class="spark" aria-hidden="true"></span> No whitelist</div>
+            <div class="badge" role="listitem"><span class="spark" aria-hidden="true"></span> DiscordSRV enabled</div>
+            <div class="badge" role="listitem"><span class="spark" aria-hidden="true"></span> Mods allowed</div>
+            <div class="badge" role="listitem"><span class="spark" aria-hidden="true"></span> Anti-cheat + chat filter</div>
+          </div>
+        </div>
+
+        <aside class="cta" aria-label="Join section">
+          <div class="cta-title">
+            <strong>Join the server</strong>
+            <span>Copy &amp; connect</span>
+          </div>
+
+          <div class="ipbox" aria-label="Server IP">
+            <div class="ip" id="ipText">mc.promptt.org:25565</div>
+            <button class="btn btn-ghost" id="copyBtn" type="button" aria-label="Copy IP">
+              <!-- copy icon -->
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M8 8h10v12H8V8Z" stroke="currentColor" stroke-width="2" />
+                <path d="M6 16H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="2" />
+              </svg>
+              Copy
+            </button>
+          </div>
+
+          <div class="btn-row">
+            <a class="btn btn-primary" href="https://discord.gg/KF34u6JrW8" target="_blank" rel="noopener">
+              <!-- discord-ish chat icon -->
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M20 15a4 4 0 0 1-4 4H9l-5 3V7a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+              Join Discord
+            </a>
+            <a class="btn btn-ghost" href="#details">
+              <!-- down arrow -->
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M7 14l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Server details
+            </a>
+          </div>
+
+          <p class="fineprint">
+            Recommended: join Discord for the full experience. <strong>DiscordSRV is running</strong>.
+            <br />
+            Discord invite:
+            <a href="https://discord.com/invite/KF34u6JrW8" target="_blank" rel="noopener">
+              https://discord.com/invite/KF34u6JrW8
+            </a>
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="details" class="grid" aria-label="Server details">
+      <div class="card">
+        <h2>
+          <!-- shield icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 2l8 4v6c0 5-3.5 9.5-8 10-4.5-.5-8-5-8-10V6l8-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+          Server Rules &amp; Notes
+        </h2>
+
+        <ul class="list">
+          <li><strong>NO WHITELIST</strong> — chat filter + anti-cheat are enabled.</li>
+          <li>Constant toxic behavior will get you banned, but proper warnings will be given.</li>
+          <li><strong>Your mods are allowed.</strong> Hack clients are welcomed, but don’t spam chat or intentionally lag the server.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>
+          <!-- info icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 10v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 7h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          Server Info
+        </h2>
+
+        <p>
+          <strong>LeafLore</strong> is live and ready. Join with:
+        </p>
+        <div class="ipbox" style="margin-top:10px;">
+          <div class="ip">mc.promptt.org:25565</div>
+          <button class="btn btn-ghost" type="button" onclick="copyIP()" aria-label="Copy IP (secondary)">
+            Copy
+          </button>
+        </div>
+
+        <p style="margin-top:12px;">
+          <span style="color:var(--muted2)">Also reachable via:</span>
+          <strong style="color:rgba(255,255,255,.88)"> mc.solaria.lol</strong>
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>
+          <!-- terminal icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 5h16v14H4V5Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M7 9l3 3-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M11 15h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Commands
+        </h2>
+
+        <div class="two-col" aria-label="Command list">
+          <div class="cmd"><code>/kill</code><span>Kill your player</span></div>
+          <div class="cmd"><code>/spawn</code><span>Random location near spawn</span></div>
+          <div class="cmd"><code>/bed</code><span>Teleport to your bed</span></div>
+          <div class="cmd"><code>/playtime</code><span>View play time</span></div>
+          <div class="cmd"><code>/joindate</code><span>View join date</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>
+          <!-- sliders icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 21v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 10V3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 21v-9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 8V3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 21v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 12V3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M2 14h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M10 10h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M18 16h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Config
+        </h2>
+
+        <ul class="list">
+          <li><strong>Seed:</strong> 1563068244</li>
+          <li><strong>Phantoms:</strong> enabled, but won’t attack unless you enable hostile phantoms with <code style="color:var(--warn)">/togglephantoms</code></li>
+          <li><strong>Ender pearls:</strong> don’t despawn on death</li>
+          <li><strong>spawnRadius:</strong> 100</li>
+          <li><strong>sleepPercentage:</strong> 10</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="footer" aria-label="Footer">
+      <div>
+        <strong style="color:rgba(255,255,255,.85)">LeafLore</strong> • Minecraft 1.21.4
+      </div>
+      <div>
+        Discord: <a href="https://discord.gg/KF34u6JrW8" target="_blank" rel="noopener">discord.gg/KF34u6JrW8</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const IP = "mc.promptt.org:25565";
+    const toastEl = document.getElementById("toast");
+
+    function showToast(msg){
+      toastEl.textContent = msg;
+      toastEl.classList.add("show");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => toastEl.classList.remove("show"), 1600);
+    }
+
+    async function copyIP(){
+      try{
+        await navigator.clipboard.writeText(IP);
+        showToast("Copied IP: " + IP);
+      }catch(e){
+        // Fallback for older browsers
+        const t = document.createElement("textarea");
+        t.value = IP;
+        t.style.position = "fixed";
+        t.style.left = "-9999px";
+        document.body.appendChild(t);
+        t.focus();
+        t.select();
+        try{
+          document.execCommand("copy");
+          showToast("Copied IP: " + IP);
+        }catch(err){
+          showToast("Copy failed — IP: " + IP);
+        }
+        document.body.removeChild(t);
+      }
+    }
+
+    document.getElementById("copyBtn").addEventListener("click", copyIP);
+  </script>
+</body>
 </html>
