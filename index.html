@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b1a12" />
+  <meta name="theme-color" content="#0f1714" />
 
   <title>LeafLore — Minecraft Server</title>
-  <meta name="description" content="LeafLore Minecraft Server, DiscordSRV Enabled, mods allowed. Join: mc.promptt.org:25565" />
+  <meta name="description" content="LeafLore Minecraft Server. DiscordSRV enabled, mods allowed. Join: mc.promptt.org:25565" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="LeafLore — Minecraft Server" />
@@ -14,26 +14,36 @@
   <meta property="og:image" content="https://github.com/Promptt001/LeafLore/blob/main/LeafLore_logo.png?raw=true" />
   <meta property="og:type" content="website" />
 
-  <!-- Favicons (optional: relies on logo url) -->
   <link rel="icon" href="https://github.com/Promptt001/LeafLore/blob/main/LeafLore_logo.png?raw=true" />
 
   <style>
+    /* =========
+       Pastel, professional theme (dark + muted accents)
+       ========= */
     :root{
-      --bg0: #07110b;
-      --bg1: #0b1a12;
-      --card: rgba(255,255,255,.06);
-      --card2: rgba(255,255,255,.08);
-      --stroke: rgba(255,255,255,.10);
+      --bg0: #0b1210;
+      --bg1: #0f1714;
+      --surface: rgba(255,255,255,.06);
+      --surface2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.12);
+
       --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.68);
-      --muted2: rgba(255,255,255,.52);
-      --accent: #4fe08f;
-      --accent2: #2bc26f;
-      --warn: #ffd166;
-      --shadow: 0 20px 70px rgba(0,0,0,.45);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.54);
+
+      /* Pastel accents */
+      --accent: #9fe3c9;   /* soft mint */
+      --accent2: #78d2b1;  /* sage mint */
+      --warm: #ffd8a8;     /* gentle warm highlight */
+
+      --shadow: 0 14px 38px rgba(0,0,0,.36);
+      --shadow-soft: 0 10px 26px rgba(0,0,0,.26);
+
       --radius: 18px;
       --radius2: 26px;
-      --max: 1100px;
+      --max: 1120px;
+
+      --focus: 0 0 0 3px rgba(159,227,201,.28);
     }
 
     *{ box-sizing: border-box; }
@@ -43,9 +53,9 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color: var(--text);
       background:
-        radial-gradient(1200px 700px at 20% -10%, rgba(79,224,143,.25), transparent 60%),
-        radial-gradient(900px 600px at 90% 10%, rgba(43,194,111,.18), transparent 55%),
-        radial-gradient(900px 900px at 40% 110%, rgba(0,255,153,.10), transparent 55%),
+        radial-gradient(1200px 680px at 20% -10%, rgba(159,227,201,.16), transparent 60%),
+        radial-gradient(880px 560px at 95% 8%, rgba(120,210,177,.13), transparent 55%),
+        radial-gradient(900px 900px at 40% 120%, rgba(255,216,168,.09), transparent 55%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow-x: hidden;
     }
@@ -63,46 +73,64 @@
       padding: 26px 18px 70px;
     }
 
+    /* =========
+       Topbar
+       ========= */
     .topbar{
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 14px;
       padding: 10px 0 18px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      margin-bottom: 14px;
     }
+
     .brand-mini{
       display: flex;
       align-items: center;
       gap: 10px;
       user-select: none;
+      min-width: 150px;
     }
+
     .dot{
       width: 10px; height: 10px;
-      border-radius: 99px;
+      border-radius: 999px;
       background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(79,224,143,.18);
+      box-shadow: 0 0 0 6px rgba(159,227,201,.14);
     }
-    .brand-mini strong{ letter-spacing: .3px; }
+
+    .brand-mini strong{
+      letter-spacing: .2px;
+      font-weight: 700;
+    }
+
     .pill{
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 10px 12px;
       background: rgba(255,255,255,.04);
-      border: 1px solid var(--stroke);
+      border: 1px solid rgba(255,255,255,.10);
       border-radius: 999px;
       color: var(--muted);
       font-size: 14px;
       backdrop-filter: blur(10px);
+      max-width: 100%;
     }
-    .pill svg{ opacity: .85; }
+    .pill svg{ opacity: .8; flex: 0 0 auto; }
+    .pill span{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+    /* =========
+       Hero
+       ========= */
     .hero{
       margin-top: 14px;
       padding: 28px;
       border-radius: var(--radius2);
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
-      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.10);
       box-shadow: var(--shadow);
       position: relative;
       overflow: hidden;
@@ -111,16 +139,17 @@
       content:"";
       position:absolute; inset:-2px;
       background:
-        radial-gradient(600px 220px at 20% 0%, rgba(79,224,143,.22), transparent 60%),
-        radial-gradient(520px 260px at 95% 40%, rgba(43,194,111,.12), transparent 55%);
+        radial-gradient(580px 240px at 18% 0%, rgba(159,227,201,.14), transparent 60%),
+        radial-gradient(520px 280px at 96% 36%, rgba(120,210,177,.10), transparent 55%);
       pointer-events:none;
-      filter: blur(0.2px);
+      filter: blur(0.4px);
+      opacity: .9;
     }
 
     .hero-grid{
       position: relative;
       display: grid;
-      grid-template-columns: 1.15fr .85fr;
+      grid-template-columns: 1.1fr .9fr;
       gap: 22px;
       align-items: center;
     }
@@ -129,7 +158,7 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      padding: 14px 14px 14px 10px;
+      padding: 12px 12px 12px 8px;
       border-radius: var(--radius);
     }
 
@@ -139,9 +168,9 @@
       border-radius: 16px;
       overflow: hidden;
       flex: 0 0 auto;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
-      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.14);
+      box-shadow: var(--shadow-soft);
     }
     .logo img{
       width: 100%;
@@ -152,16 +181,23 @@
 
     h1{
       margin: 0;
-      font-size: clamp(30px, 3.4vw, 46px);
-      letter-spacing: .3px;
-      line-height: 1.06;
+      font-size: clamp(30px, 3.2vw, 44px);
+      letter-spacing: .25px;
+      line-height: 1.08;
     }
+
     .subtitle{
       margin-top: 10px;
       color: var(--muted);
-      font-size: 16px;
-      line-height: 1.55;
+      font-size: 15.5px;
+      line-height: 1.6;
       max-width: 62ch;
+    }
+    .subtitle .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      color: rgba(255,255,255,.88);
+      letter-spacing: .15px;
+      font-size: 0.95em;
     }
 
     .badges{
@@ -177,25 +213,28 @@
       padding: 9px 12px;
       border-radius: 999px;
       background: rgba(255,255,255,.045);
-      border: 1px solid rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.10);
       color: var(--muted);
       font-size: 13px;
       backdrop-filter: blur(10px);
     }
     .badge .spark{
       width: 8px; height: 8px;
-      border-radius: 99px;
-      background: rgba(79,224,143,.95);
-      box-shadow: 0 0 0 6px rgba(79,224,143,.16);
+      border-radius: 999px;
+      background: rgba(159,227,201,.95);
+      box-shadow: 0 0 0 6px rgba(159,227,201,.12);
     }
 
+    /* =========
+       CTA panel
+       ========= */
     .cta{
       display:flex;
       flex-direction: column;
       gap: 12px;
       padding: 18px;
       border-radius: var(--radius);
-      background: rgba(0,0,0,.18);
+      background: rgba(0,0,0,.16);
       border: 1px solid rgba(255,255,255,.10);
       backdrop-filter: blur(10px);
     }
@@ -247,10 +286,10 @@
       cursor: pointer;
       border-radius: 14px;
       padding: 11px 14px;
-      font-weight: 600;
+      font-weight: 650;
       font-size: 14px;
       letter-spacing: .2px;
-      transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
+      transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
       display:inline-flex;
       align-items:center;
       justify-content: center;
@@ -259,10 +298,16 @@
       white-space: nowrap;
     }
 
+    .btn:focus-visible,
+    button:focus-visible{
+      outline: none;
+      box-shadow: var(--focus);
+    }
+
     .btn-primary{
-      background: linear-gradient(180deg, rgba(79,224,143,.95), rgba(43,194,111,.92));
-      color: #052010;
-      box-shadow: 0 12px 34px rgba(43,194,111,.26);
+      background: linear-gradient(180deg, rgba(159,227,201,.95), rgba(120,210,177,.92));
+      color: #051f16;
+      box-shadow: 0 12px 30px rgba(120,210,177,.22);
     }
     .btn-primary:hover{ filter: brightness(1.02); transform: translateY(-1px); }
     .btn-primary:active{ transform: translateY(0px); filter: brightness(.98); }
@@ -270,19 +315,22 @@
     .btn-ghost{
       background: rgba(255,255,255,.05);
       border: 1px solid rgba(255,255,255,.10);
-      color: rgba(255,255,255,.88);
+      color: rgba(255,255,255,.90);
       backdrop-filter: blur(10px);
     }
-    .btn-ghost:hover{ background: rgba(255,255,255,.07); transform: translateY(-1px); }
+    .btn-ghost:hover{ background: rgba(255,255,255,.075); transform: translateY(-1px); }
     .btn-ghost:active{ transform: translateY(0px); }
 
     .fineprint{
       color: var(--muted2);
       font-size: 13px;
-      line-height: 1.45;
+      line-height: 1.55;
       margin: 0;
     }
 
+    /* =========
+       Cards grid
+       ========= */
     .grid{
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -292,9 +340,9 @@
 
     .card{
       border-radius: var(--radius);
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      box-shadow: 0 18px 45px rgba(0,0,0,.30);
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow-soft);
       padding: 18px;
       position: relative;
       overflow: hidden;
@@ -303,11 +351,10 @@
       content:"";
       position:absolute;
       inset:-2px;
-      background: radial-gradient(520px 220px at 20% 0%, rgba(79,224,143,.10), transparent 60%);
+      background: radial-gradient(520px 240px at 18% 0%, rgba(159,227,201,.08), transparent 60%);
       pointer-events:none;
       opacity: .85;
     }
-
     .card > *{ position: relative; }
 
     .card h2{
@@ -322,7 +369,7 @@
     .card p{
       margin: 0 0 10px 0;
       color: var(--muted);
-      line-height: 1.55;
+      line-height: 1.6;
       font-size: 14px;
     }
 
@@ -331,7 +378,7 @@
       padding-left: 18px;
       color: var(--muted);
       font-size: 14px;
-      line-height: 1.55;
+      line-height: 1.6;
     }
     .list li{ margin: 6px 0; }
 
@@ -351,12 +398,12 @@
       background: rgba(255,255,255,.05);
       border: 1px solid rgba(255,255,255,.09);
       font-size: 14px;
-      color: rgba(255,255,255,.85);
+      color: rgba(255,255,255,.86);
     }
     .cmd code{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
-      color: rgba(255,255,255,.92);
-      background: rgba(0,0,0,.20);
+      color: rgba(255,255,255,.94);
+      background: rgba(0,0,0,.18);
       padding: 3px 7px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.10);
@@ -375,7 +422,8 @@
       justify-content: space-between;
       gap: 10px;
       flex-wrap: wrap;
-      padding: 10px 2px 0;
+      padding: 12px 2px 0;
+      border-top: 1px solid rgba(255,255,255,.08);
     }
 
     .toast{
@@ -383,12 +431,12 @@
       left: 50%;
       bottom: 20px;
       transform: translateX(-50%);
-      background: rgba(5,32,16,.92);
-      border: 1px solid rgba(79,224,143,.35);
+      background: rgba(12,22,18,.92);
+      border: 1px solid rgba(159,227,201,.30);
       color: rgba(255,255,255,.92);
       padding: 10px 12px;
       border-radius: 999px;
-      box-shadow: 0 18px 50px rgba(0,0,0,.50);
+      box-shadow: 0 16px 40px rgba(0,0,0,.45);
       font-size: 13px;
       opacity: 0;
       pointer-events: none;
@@ -404,11 +452,13 @@
 
     /* Responsive */
     @media (max-width: 920px){
+      .topbar{ flex-wrap: wrap; gap: 10px; }
       .hero-grid{ grid-template-columns: 1fr; }
       .grid{ grid-template-columns: 1fr; }
       .two-col{ grid-template-columns: 1fr; }
       .cta{ padding: 16px; }
       .logo{ width: 68px; height: 68px; }
+      .pill span{ white-space: normal; }
     }
 
     /* Reduced motion */
@@ -428,13 +478,13 @@
         <strong>LeafLore</strong>
       </div>
 
-      <div class="pill" title="Server status not checked on this page">
+      <div class="pill" title="Server status is not checked on this page">
         <!-- simple leaf icon -->
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M20 4c-8.5.5-14.5 6.5-16 16 8.5-1.5 15.5-7.5 16-16Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
           <path d="M8 16c2-2 6-6 12-8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        <span>Running Paper 1.21.11 • Launched January 2026</span>
+        <span>Paper 1.21.11 • Launched January 2026 • DiscordSRV enabled</span>
       </div>
     </div>
 
@@ -452,16 +502,16 @@
             <div>
               <h1>LeafLore</h1>
               <div class="subtitle">
-                <strong>LeafLore</strong> (<span style="color:rgba(255,255,255,.85)">mc.promptt.org</span>) launched in January 2026
-                with a fresh <strong>1.21.11</strong> map.
+                A relaxed <strong>Semi‑Vanilla SMP</strong> on a fresh <strong>1.21.11</strong> map.
+                Connect via <span class="mono">mc.promptt.org:25565</span>.
               </div>
             </div>
           </div>
 
           <div class="badges" role="list" aria-label="Highlights">
-            <div class="badge" role="listitem"><span class="spark" aria-hidden="true"></span> Semi-Vanilla SMP</div>
+            <div class="badge" role="listitem"><span class="spark" aria-hidden="true"></span> Semi‑Vanilla SMP</div>
             <div class="badge" role="listitem"><span class="spark" aria-hidden="true"></span> DiscordSRV Plugin</div>
-            <div class="badge" role="listitem"><span class="spark" aria-hidden="true"></span> Relaxed Anti-Cheat</div>
+            <div class="badge" role="listitem"><span class="spark" aria-hidden="true"></span> Relaxed Anti‑Cheat</div>
             <div class="badge" role="listitem"><span class="spark" aria-hidden="true"></span> Chat Filter</div>
           </div>
         </div>
@@ -486,7 +536,7 @@
 
           <div class="btn-row">
             <a class="btn btn-primary" href="https://discord.gg/KF34u6JrW8" target="_blank" rel="noopener">
-              <!-- discord-ish chat icon -->
+              <!-- chat icon -->
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M20 15a4 4 0 0 1-4 4H9l-5 3V7a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
               </svg>
@@ -503,9 +553,9 @@
           </div>
 
           <p class="fineprint">
-            Recommended: join Discord for the full experience. <strong>DiscordSRV is running</strong>.
-            <br />
-            Discord invite:
+            Recommended: join Discord for announcements and chat bridging.
+            <strong>DiscordSRV is running</strong>.<br />
+            Invite:
             <a href="https://discord.com/invite/KF34u6JrW8" target="_blank" rel="noopener">
               https://discord.com/invite/KF34u6JrW8
             </a>
@@ -521,13 +571,13 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 2l8 4v6c0 5-3.5 9.5-8 10-4.5-.5-8-5-8-10V6l8-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
           </svg>
-          Server Rules &amp; Notes
+          Rules &amp; notes
         </h2>
 
         <ul class="list">
-          <li><strong>NO SPAMMING</strong> - Abusing the chat feature will get you muted.</li>
-          <li><strong>NO ABUSIVE LANGUAGE</strong> - Constant toxic behavior will have consequences, but proper warnings will be given. (griefing is not consiered toxic)</li>
-          <li><strong>NO LAGGING</strong> Utility mods are okay but dont use them to harm server performance.</li>
+          <li><strong>No spamming:</strong> chat abuse will result in a mute.</li>
+          <li><strong>No abusive language:</strong> repeated toxicity has consequences (warnings are given first).</li>
+          <li><strong>No lagging:</strong> utility mods are OK — do not use them to harm server performance.</li>
         </ul>
       </div>
 
@@ -539,12 +589,13 @@
             <path d="M12 10v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             <path d="M12 7h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
           </svg>
-          Server Info
+          Server info
         </h2>
 
         <p>
           <strong>LeafLore</strong> is live and ready. Join with:
         </p>
+
         <div class="ipbox" style="margin-top:10px;">
           <div class="ip">mc.promptt.org:25565</div>
           <button class="btn btn-ghost" type="button" onclick="copyIP()" aria-label="Copy IP (secondary)">
@@ -570,12 +621,12 @@
         </h2>
 
         <div class="two-col" aria-label="Command list">
-          <div class="cmd"><code>/kill</code><span>Kills your player</span></div>
-          <div class="cmd"><code>/spawn</code><span>Teleport to a random location near spawn</span></div>
-          <div class="cmd"><code>/bed</code><span>Teleports you to your bed</span></div>
+          <div class="cmd"><code>/kill</code><span>Respawn your player</span></div>
+          <div class="cmd"><code>/spawn</code><span>Return near spawn</span></div>
+          <div class="cmd"><code>/bed</code><span>Teleport to your bed</span></div>
           <div class="cmd"><code>/playtime</code><span>View play time</span></div>
           <div class="cmd"><code>/joindate</code><span>View join date</span></div>
-          <div class="cmd"><code>/togglephantoms</code><span>Toggles phantoms attacking</span></div>
+          <div class="cmd"><code>/togglephantoms</code><span>Toggle phantom attacks</span></div>
         </div>
       </div>
 
@@ -598,8 +649,8 @@
 
         <ul class="list">
           <li><strong>Seed:</strong> 1563068244</li>
-          <li><strong>Phantoms</strong> enabled, but won’t attack unless you enable hostile phantoms with /togglephantoms </li>
-          <li><strong>Ender pearls</strong> don’t despawn on death</li>
+          <li><strong>Phantoms:</strong> enabled, but won’t attack unless you enable hostile phantoms with <code>/togglephantoms</code></li>
+          <li><strong>Ender pearls:</strong> don’t despawn on death</li>
           <li><strong>spawnRadius:</strong> 100</li>
           <li><strong>sleepPercentage:</strong> 10</li>
         </ul>
@@ -608,7 +659,7 @@
 
     <div class="footer" aria-label="Footer">
       <div>
-        <strong style="color:rgba(255,255,255,.85)">LeafLore</strong> • Minecraft 1.21.11
+        <strong style="color:rgba(255,255,255,.88)">LeafLore</strong> • Minecraft 1.21.11
       </div>
       <div>
         Discord: <a href="https://discord.gg/KF34u6JrW8" target="_blank" rel="noopener">discord.gg/KF34u6JrW8</a>
