@@ -389,8 +389,14 @@
       margin-top: 8px;
     }
 
+    .command-list{
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
     .cmd{
       display:flex;
+      align-items: center;
       justify-content: space-between;
       gap: 10px;
       padding: 10px 12px;
@@ -407,6 +413,8 @@
       padding: 3px 7px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.10);
+      white-space: nowrap;
+      flex: 0 0 auto;
     }
     .cmd span{
       color: var(--muted);
@@ -620,12 +628,13 @@
           Commands
         </h2>
 
-        <div class="two-col" aria-label="Command list">
+        <div class="two-col command-list" aria-label="Command list">
           <div class="cmd"><code>/kill</code><span>Kills your player</span></div>
           <div class="cmd"><code>/spawn</code><span>Return near spawn</span></div>
           <div class="cmd"><code>/bed</code><span>Teleport to your bed</span></div>
           <div class="cmd"><code>/playtime</code><span>View play time</span></div>
           <div class="cmd"><code>/joindate</code><span>View join date</span></div>
+          <div class="cmd"><code>/pv 1, /pv 2, /pv 3</code><span>Personal vaults (up to 3)</span></div>
           <div class="cmd"><code>/togglephantoms</code><span>Toggle phantom attacks</span></div>
         </div>
       </div>
