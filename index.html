@@ -4,13 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0f1714" />
+  <meta name="color-scheme" content="dark light" />
 
   <title>LeafLore — Minecraft Server</title>
-  <meta name="description" content="LeafLore Minecraft Server. DiscordSRV enabled, mods allowed. Join: mc.leaflore.cc:25565" />
+  <meta name="description" content="LeafLore Minecraft Server. Paper 26.2 • DiscordSRV • Villager Holocrons • mods allowed. Join: mc.leaflore.cc:25565" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="LeafLore — Minecraft Server" />
-  <meta property="og:description" content="Fresh 1.21.11 map • DiscordSRV • Mods allowed • No whitelist" />
+  <meta property="og:description" content="Paper 26.2 • DiscordSRV • Villager Holocrons • Semi-Vanilla SMP • No whitelist" />
   <meta property="og:image" content="https://github.com/Promptt001/LeafLore/blob/main/LeafLore_logo.png?raw=true" />
   <meta property="og:type" content="website" />
 
@@ -469,6 +470,175 @@
       .pill span{ white-space: normal; }
     }
 
+    /* =========
+       Theme tokens (light theme + shared additions)
+       ========= */
+    :root{
+      --text-strong: rgba(255,255,255,.88);
+      --ink-strong: rgba(255,255,255,.88);
+      --code-bg: rgba(0,0,0,.18);
+    }
+
+    html[data-theme="light"]{
+      --bg0: #eef4f0;
+      --bg1: #e4ede8;
+      --surface: rgba(255,255,255,.66);
+      --surface2: rgba(255,255,255,.8);
+      --stroke: rgba(10,40,28,.14);
+
+      --text: rgba(8,30,20,.92);
+      --muted: rgba(8,30,20,.68);
+      --muted2: rgba(8,30,20,.52);
+      --text-strong: rgba(8,30,20,.9);
+      --ink-strong: rgba(8,30,20,.9);
+
+      --accent: #1f8f66;
+      --accent2: #17805a;
+      --warm: #b0722a;
+
+      --shadow: 0 14px 34px rgba(20,60,44,.16);
+      --shadow-soft: 0 10px 24px rgba(20,60,44,.12);
+      --code-bg: rgba(0,0,0,.05);
+      --focus: 0 0 0 3px rgba(31,143,102,.30);
+    }
+
+    html[data-theme="light"] body{
+      background:
+        radial-gradient(1200px 680px at 20% -10%, rgba(31,143,102,.10), transparent 60%),
+        radial-gradient(880px 560px at 95% 8%, rgba(23,128,90,.09), transparent 55%),
+        radial-gradient(900px 900px at 40% 120%, rgba(176,114,42,.07), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+    }
+
+    html[data-theme="light"] .topbar{ border-bottom-color: rgba(10,40,28,.12); }
+    html[data-theme="light"] .pill,
+    html[data-theme="light"] .badge{
+      background: rgba(255,255,255,.6);
+      border-color: rgba(10,40,28,.12);
+    }
+    html[data-theme="light"] .hero{
+      background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.55));
+      border-color: rgba(10,40,28,.12);
+    }
+    html[data-theme="light"] .logo{
+      border-color: rgba(10,40,28,.14);
+      background: rgba(0,0,0,.04);
+    }
+    html[data-theme="light"] .subtitle .mono,
+    html[data-theme="light"] .ip,
+    html[data-theme="light"] .cmd,
+    html[data-theme="light"] .cmd code{ color: var(--ink-strong); }
+    html[data-theme="light"] .cta{
+      background: rgba(255,255,255,.55);
+      border-color: rgba(10,40,28,.12);
+    }
+    html[data-theme="light"] .ipbox{
+      background: rgba(255,255,255,.75);
+      border-color: rgba(10,40,28,.10);
+    }
+    html[data-theme="light"] .btn-ghost{
+      background: rgba(255,255,255,.7);
+      border-color: rgba(10,40,28,.14);
+      color: rgba(8,30,20,.85);
+    }
+    html[data-theme="light"] .btn-ghost:hover{ background: rgba(255,255,255,.92); }
+    html[data-theme="light"] .card{ border-color: rgba(10,40,28,.12); }
+    html[data-theme="light"] .cmd{
+      background: rgba(255,255,255,.7);
+      border-color: rgba(10,40,28,.10);
+    }
+    html[data-theme="light"] .cmd code{
+      background: var(--code-bg);
+      border-color: rgba(10,40,28,.10);
+    }
+    html[data-theme="light"] .footer{ border-top-color: rgba(10,40,28,.12); }
+    html[data-theme="light"] .toast{
+      background: rgba(255,255,255,.96);
+      border-color: rgba(31,143,102,.4);
+      color: rgba(8,30,20,.9);
+    }
+
+    .ink{ color: var(--ink-strong); }
+
+    /* Topbar right cluster (status + info + theme toggle) */
+    .topbar-right{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .theme-toggle{ padding: 10px; }
+    .theme-toggle svg{ display: block; }
+    html[data-theme="light"] .icon-sun{ display: none; }
+    html:not([data-theme="light"]) .icon-moon{ display: none; }
+
+    /* Live server status */
+    .status-dot{
+      width: 9px; height: 9px;
+      border-radius: 999px;
+      background: var(--muted2);
+      flex: 0 0 auto;
+    }
+    .status-dot.online{
+      background: #46d488;
+      animation: statusPulse 2.4s ease-out infinite;
+    }
+    .status-dot.offline{ background: #ff6b6b; }
+    @keyframes statusPulse{
+      0%   { box-shadow: 0 0 0 0 rgba(70,212,136,.45); }
+      70%  { box-shadow: 0 0 0 8px rgba(70,212,136,0); }
+      100% { box-shadow: 0 0 0 0 rgba(70,212,136,0); }
+    }
+
+    .muted2{ color: var(--muted2); }
+
+    .mono2{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size: .92em;
+      color: var(--ink-strong);
+    }
+
+    /* Inline code in lists */
+    .list code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      background: var(--code-bg);
+      padding: 2px 7px;
+      border-radius: 8px;
+      border: 1px solid var(--stroke);
+      font-size: .92em;
+      color: var(--ink-strong);
+    }
+
+    /* Holocron feature card */
+    .flow{
+      margin: 10px 0 0;
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .flow li{ margin: 6px 0; }
+    .flow strong{ color: var(--text-strong); }
+    .tag-new{
+      font-size: 11px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #051f16;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      padding: 3px 9px;
+      border-radius: 999px;
+      margin-left: auto;
+      flex: 0 0 auto;
+    }
+    html[data-theme="light"] .tag-new{ color: #ffffff; }
+
+    @media (prefers-reduced-motion: reduce){
+      .status-dot.online{ animation: none; }
+    }
+
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       *{ scroll-behavior: auto !important; }
@@ -486,13 +656,30 @@
         <strong>LeafLore</strong>
       </div>
 
-      <div class="pill" title="Server status is not checked on this page">
-        <!-- simple leaf icon -->
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M20 4c-8.5.5-14.5 6.5-16 16 8.5-1.5 15.5-7.5 16-16Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M8 16c2-2 6-6 12-8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <span>Paper 1.21.11 • Launched January 2026 • DiscordSRV enabled</span>
+      <div class="topbar-right">
+        <div class="pill" id="statusPill" title="Live server status (mc.leaflore.cc)">
+          <span class="status-dot" id="statusDot" aria-hidden="true"></span>
+          <span id="statusText">Checking status…</span>
+        </div>
+
+        <div class="pill" title="Server software">
+          <!-- simple leaf icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 4c-8.5.5-14.5 6.5-16 16 8.5-1.5 15.5-7.5 16-16Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M8 16c2-2 6-6 12-8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>Paper 26.2 • Launched January 2026 • DiscordSRV</span>
+        </div>
+
+        <button class="btn btn-ghost theme-toggle" id="themeToggle" type="button" aria-label="Toggle light or dark theme" title="Toggle theme">
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </button>
       </div>
     </div>
 
@@ -510,7 +697,8 @@
             <div>
               <h1>LeafLore</h1>
               <div class="subtitle">
-                A relaxed <strong>Semi‑Vanilla SMP</strong> on a fresh <strong>1.21.11</strong> map.
+                A relaxed <strong>Semi‑Vanilla SMP</strong> running <strong>Paper 26.2</strong>.
+                Capture, trade &amp; re‑imprint villagers with <strong>Villager Holocrons</strong>.
                 Connect via <span class="mono">mc.leaflore.cc:25565</span>.
               </div>
             </div>
@@ -521,6 +709,7 @@
             <div class="badge" role="listitem"><span class="spark" aria-hidden="true"></span> DiscordSRV Plugin</div>
             <div class="badge" role="listitem"><span class="spark" aria-hidden="true"></span> Relaxed Anti‑Cheat</div>
             <div class="badge" role="listitem"><span class="spark" aria-hidden="true"></span> Chat Filter</div>
+            <div class="badge" role="listitem"><span class="spark" aria-hidden="true"></span> Villager Holocrons</div>
           </div>
         </div>
 
@@ -605,7 +794,7 @@
         </p>
 
         <div class="ipbox" style="margin-top:10px;">
-          <div class="ip">mc.leaflore.cc:25565</div>
+          <div class="ip" id="ipText2">mc.leaflore.cc:25565</div>
           <button class="btn btn-ghost" type="button" onclick="copyIP()" aria-label="Copy IP (secondary)">
             Copy
           </button>
@@ -613,8 +802,13 @@
 
         <p style="margin-top:12px;">
           <span style="color:var(--muted2)">Also reachable via:</span>
-          <strong style="color:rgba(255,255,255,.88)"> mc.promptt.org</strong>
+          <strong class="ink"> mc.promptt.org</strong>
         </p>
+        <ul class="list" style="margin-top:10px;">
+          <li><strong>Software:</strong> Paper 26.2</li>
+          <li><strong>Launched:</strong> January 2026</li>
+          <li><strong>Whitelist:</strong> none — anyone can join</li>
+        </ul>
       </div>
 
       <div class="card">
@@ -636,7 +830,32 @@
           <div class="cmd"><code>/joindate</code><span>View join date</span></div>
           <div class="cmd"><code>/pv 1, /pv 2, /pv 3</code><span>Personal vaults (up to 3)</span></div>
           <div class="cmd"><code>/togglephantoms</code><span>Toggle phantom attacks</span></div>
+          <div class="cmd"><code>/holocron</code><span>Get an Empty Holocron <span class="muted2">(admin)</span></span></div>
         </div>
+      </div>
+
+      <div class="card">
+        <h2>
+          <!-- crystal/diamond icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 3h12l4 6-10 12L2 9l4-6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M2 9h20M9 3l3 18L15 3" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+          Villager Holocrons
+          <span class="tag-new">New</span>
+        </h2>
+
+        <p>
+          Capture any villager's knowledge into an <strong class="ink">Empty Holocron</strong> (an echo shard)
+          and imprint it onto another villager later — profession, type, level, XP, name &amp; trades included.
+          Records live in <span class="mono2">records.yml</span> and survive restarts.
+        </p>
+
+        <ol class="flow">
+          <li><strong>Mine or fish</strong> — Empty Holocrons drop from almost every ore (deepslate &amp; nether varieties, even ancient debris) and can be fished up.</li>
+          <li><strong>Right-click a villager</strong> with an Empty Holocron to record its profession, type, level, XP, custom name and visible trades.</li>
+          <li><strong>Right-click another villager</strong> with the Charged Holocron to overwrite it with the stored data.</li>
+        </ol>
       </div>
 
       <div class="card">
@@ -657,9 +876,11 @@
         </h2>
 
         <ul class="list">
+          <li><strong>Software:</strong> Paper 26.2</li>
           <li><strong>Seed:</strong> 1563068244</li>
           <li><strong>Phantoms:</strong> Phantoms are enabled, but won’t attack unless you toggle hostility with <code>/togglephantoms</code></li>
           <li><strong>Villagers In A Bucket:</strong> You can collect villagers in a bucket</li>
+          <li><strong>Villager Holocrons:</strong> empty holocrons drop from ores (deepslate &amp; nether varieties, even ancient debris) and from fishing; charged holocrons re‑imprint villagers and records persist across restarts</li>
           <li>Ender pearls won’t despawn on death</li>
           <li><strong>spawnRadius:</strong> 100</li>
           <li><strong>sleepPercentage:</strong> 10</li>
@@ -669,7 +890,7 @@
 
     <div class="footer" aria-label="Footer">
       <div>
-        <strong style="color:rgba(255,255,255,.88)">LeafLore</strong> • Minecraft 1.21.11
+        <strong class="ink">LeafLore</strong> • Paper 26.2
       </div>
       <div>
         Discord: <a href="https://discord.gg/KF34u6JrW8" target="_blank" rel="noopener">discord.gg/KF34u6JrW8</a>
@@ -714,6 +935,67 @@
     }
 
     document.getElementById("copyBtn").addEventListener("click", copyIP);
+
+    /* =========
+       Theme toggle (persisted, respects OS preference)
+       ========= */
+    const THEME_KEY = "leaflore-theme";
+    const root = document.documentElement;
+
+    function applyTheme(theme){
+      if(theme === "light"){
+        root.setAttribute("data-theme", "light");
+      }else{
+        root.removeAttribute("data-theme");
+      }
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if(meta) meta.setAttribute("content", theme === "light" ? "#eef4f0" : "#0f1714");
+    }
+
+    const savedTheme = (() => {
+      try{ return localStorage.getItem(THEME_KEY); }catch(e){ return null; }
+    })();
+    const prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+    applyTheme(savedTheme || (prefersLight ? "light" : "dark"));
+
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+      applyTheme(next);
+      try{ localStorage.setItem(THEME_KEY, next); }catch(e){ /* storage unavailable */ }
+    });
+
+    /* =========
+       Live server status (mcsrvstat.us)
+       ========= */
+    const statusDot = document.getElementById("statusDot");
+    const statusText = document.getElementById("statusText");
+
+    async function refreshStatus(){
+      try{
+        const res = await fetch("https://api.mcsrvstat.us/3/mc.leaflore.cc");
+        if(!res.ok) throw new Error("bad response");
+        const data = await res.json();
+        if(data.online){
+          statusDot.classList.add("online");
+          statusDot.classList.remove("offline");
+          const n = data.players && typeof data.players.online === "number" ? data.players.online : null;
+          statusText.textContent = "Online" + (n !== null ? " — " + n + " playing" : "");
+          statusText.parentElement.title = "mc.leaflore.cc is online" + (n !== null ? " (" + n + " players)" : "");
+        }else{
+          statusDot.classList.add("offline");
+          statusDot.classList.remove("online");
+          statusText.textContent = "Offline";
+          statusText.parentElement.title = "mc.leaflore.cc is currently offline";
+        }
+      }catch(e){
+        statusDot.classList.remove("online", "offline");
+        statusText.textContent = "Status unavailable";
+        statusText.parentElement.title = "Could not reach status API";
+      }
+    }
+
+    refreshStatus();
+    setInterval(refreshStatus, 60000);
   </script>
 </body>
 </html>
